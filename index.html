@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plaza Cat – International Customer Care</title>
+  <meta name="description" content="Plaza Cat – International Customer Care. Contacto por teléfono, WhatsApp, correo y Lost Luggage Service." />
+  <meta name="theme-color" content="#16a34a" />
+  <!-- Favicons -->
+  <link rel="icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+
+  <style>
+    :root{
+      --green:#16a34a; --green-600:#15803d; --bg:#ffffff; --text:#0f172a; --muted:#475569; --border:#e2e8f0; --card:#ffffff; --radius:16px; --red:#ef4444;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{ margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, "Gotham Book", sans-serif; background:var(--bg); color:var(--text); }
+    .container{ max-width:980px; margin:0 auto; padding:20px }
+
+    /* Header */
+    header{ background:var(--green); color:#fff; padding:16px 0; border-bottom:4px solid var(--green-600) }
+    .site-header-inner{ display:flex; align-items:center; gap:14px; justify-content:center; flex-wrap:wrap }
+    .brand-logo{ height:48px; width:auto; display:block }
+    @media (min-width: 720px){ .brand-logo{ height:60px } }
+    header h1{ margin:0; text-align:center; font-size:clamp(1.1rem, 2vw + 1rem, 2rem); text-transform:uppercase; letter-spacing:.4px; color:#fff }
+
+    /* Grid */
+    .grid{ display:grid; gap:18px; grid-template-columns: 1fr; margin-top:18px }
+    @media (min-width: 840px){ .grid{ grid-template-columns: 1fr 1fr } }
+
+    /* Cards */
+    .card{ background:var(--card); border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 12px 32px rgba(2,6,23,.06); padding:16px }
+    .card h2{ margin:.2rem 0 0.6rem; font-size:1.1rem }
+    .muted{ color:var(--muted) }
+
+    .row{ display:grid; grid-template-columns: 1fr auto; gap:10px; align-items:center; padding:10px 0; border-top:1px dashed var(--border) }
+    .row:first-child{ border-top:none }
+
+    .btn{ display:inline-flex; align-items:center; gap:8px; border:none; border-radius:999px; padding:10px 14px; font-weight:700; cursor:pointer; text-decoration:none }
+    .btn-green{ background:var(--green); color:#fff }
+    .btn-green:hover{ background:var(--green-600) }
+    .btn-ghost{ background:transparent; border:2px solid var(--green); color:var(--green-600) }
+
+    .value{ font-weight:800 }
+    .link{ color: inherit; text-decoration: underline; text-underline-offset: 2px }
+
+    .card-red-border{ border-color: var(--red); }
+
+    footer{ text-align:center; color:var(--muted); margin:24px 0 18px }
+
+    .status{ margin-left:8px; padding:4px 8px; border-radius:999px; border:1px solid var(--border); font-size:.85rem }
+    .open{ background:rgba(22,163,74,.12); color:#166534; border-color:rgba(22,163,74,.35) }
+    .closed{ background:#fef2f2; color:#991b1b; border-color:#fecaca }
+
+    /* Floating WhatsApp button */
+    .floating{ position:fixed; right:16px; bottom:16px; z-index:9999 }
+    .fab-wa{ width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:var(--green); color:#fff; box-shadow:0 8px 20px rgba(22,163,74,.35); text-decoration:none; font-size:24px }
+    .fab-wa:hover{ filter:brightness(.95) }
+  </style>
+</head>
+<body>
+  <header role="banner">
+    <div class="container">
+      <div class="site-header-inner">
+        <img class="brand-logo" src="logo-eci.png" alt="El Corte Inglés" />
+        <h1>Plaza Cat – International Customer Care</h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <section class="grid" aria-label="Canales de contacto">
+
+      <!-- Teléfono -->
+      <article class="card" aria-labelledby="tel-title">
+        <h2 id="tel-title">Teléfono</h2>
+        <p class="muted">Llámanos en horario laboral. Te atenderemos lo antes posible <span id="telState" class="status">Comprobando…</span></p>
+        <div class="row">
+          <div>
+            <div class="muted">Número</div>
+            <div class="value" id="telPretty">+34 682 82 41 14</div>
+          </div>
+          <a id="btnCall" class="btn btn-green" href="tel:+34682824114">📞 Llamar</a>
+        </div>
+        <div class="row">
+          <div class="muted">Copiar</div>
+          <button class="btn btn-ghost" id="copyTel" type="button">📋 Copiar número</button>
+        </div>
+      </article>
+
+      <!-- WhatsApp -->
+      <article class="card" aria-labelledby="wa-title">
+        <h2 id="wa-title">WhatsApp</h2>
+        <p class="muted">Escríbenos por WhatsApp para consultas comerciales o seguimiento.</p>
+        <div class="row">
+          <div>
+            <div class="muted">Número</div>
+            <div class="value" id="waPretty">+34 682 82 41 14</div>
+          </div>
+          <a id="btnWA" class="btn btn-green" target="_blank" rel="noopener" href="https://wa.me/34682824114?text=Hola%2C%20necesito%20informaci%C3%B3n">💬 Abrir WhatsApp</a>
+        </div>
+        <div class="row">
+          <div class="muted">Copiar</div>
+          <button class="btn btn-ghost" id="copyWA" type="button">📋 Copiar número</button>
+        </div>
+      </article>
+
+      <!-- Correo electrónico -->
+      <article class="card" aria-labelledby="mail-title">
+        <h2 id="mail-title">Correo electrónico</h2>
+        <p class="muted">Puedes escribirnos por email. Normalmente respondemos en menos de 24 horas laborables.</p>
+        <div class="row">
+          <div>
+            <div class="muted">Dirección</div>
+            <div class="value"><a id="mailLink" class="link" href="mailto:internationalplazacataluna@elcorteingles.es">internationalplazacataluna@elcorteingles.es</a></div>
+          </div>
+          <a id="btnMail" class="btn btn-green" href="mailto:internationalplazacataluna@elcorteingles.es?subject=Consulta%20de%20cliente&body=Hola%2C%20necesito%20ayuda%20con...">✉️ Enviar email</a>
+        </div>
+        <div class="row">
+          <div class="muted">Copiar</div>
+          <button class="btn btn-ghost" id="copyMail" type="button">📋 Copiar email</button>
+        </div>
+      </article>
+
+      <!-- LOST LUGGAGE SERVICE -->
+      <article class="card card-red-border" aria-labelledby="lost-title">
+        <h2 id="lost-title">LOST LUGGAGE SERVICE</h2>
+        <div class="card-body text-normal">
+          <p>
+            Servicio de reposición de artículos esencial para huéspedes del hotel con equipaje extraviado durante el viaje.
+            Ofrecemos una reposición inmediata de artículos esenciales: kit de higiene personal, ropa y mucho más. El cliente puede
+            solicitar los artículos por WhatsApp o correo electrónico.
+          </p>
+          <div class="row">
+            <div>
+              <div class="muted">WhatsApp</div>
+              <div class="value" id="waPrettyLL">+34 682 82 41 14</div>
+            </div>
+            <a id="btnWALL" class="btn btn-green" target="_blank" rel="noopener" href="#">📨 Enviar mensaje</a>
+          </div>
+          <div class="row">
+            <div>
+              <div class="muted">Correo</div>
+              <div class="value"><a id="mailLinkLL" class="link" href="mailto:internationalplazacataluna@elcorteingles.es">internationalplazacataluna@elcorteingles.es</a></div>
+            </div>
+            <a id="btnMailLL" class="btn btn-green" href="mailto:internationalplazacataluna@elcorteingles.es?subject=LOST%20LUGGAGE%20SERVICE&body=Hola%2C%20soy%20hu%C3%A9sped%20del%20hotel%20y%20he%20perdido%20mi%20equipaje.%20Necesito%20reposici%C3%B3n%20de%20art%C3%ADculos%20esenciales.">✉️ Enviar email</a>
+          </div>
+        </div>
+      </article>
+
+    </section>
+  </main>
+
+  <footer role="contentinfo">
+    <div class="container">
+      <small>© <span id="year"></span> Plaza Cat • Página responsive</small>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a class="floating fab-wa" aria-label="Abrir WhatsApp" target="_blank" rel="noopener" id="waFab">💬</a>
+
+  <script>
+    // Config
+    const tel = '+34682824114';
+    const wa  = '34682824114';
+    const email = 'internationalplazacataluna@elcorteingles.es';
+
+    // Util
+    function prettyES(num){
+      if(num.startsWith('+34')){
+        const d = num.replace(/\D/g,'').slice(2);
+        if(d.length===9){ return '+34 ' + d.replace(/(\d{3})(\d{2})(\d{2})(\d{2})/, '$1 $2 $3 $4'); }
+      }
+      return num;
+    }
+
+    // Pintar básicos
+    document.getElementById('telPretty').textContent = prettyES(tel);
+    document.getElementById('waPretty').textContent  = prettyES('+'+wa);
+    document.getElementById('btnCall').href = 'tel:'+tel;
+    document.getElementById('btnWA').href   = 'https://wa.me/'+wa+'?text='+encodeURIComponent('Hola, necesito información');
+    document.getElementById('waFab').href   = 'https://wa.me/'+wa+'?text='+encodeURIComponent('Hola, necesito información');
+
+    // Email (bloque correo)
+    document.getElementById('mailLink').href = 'mailto:'+email;
+    document.getElementById('mailLink').textContent = email;
+    document.getElementById('btnMail').href = 'mailto:'+email+'?subject='+encodeURIComponent('Consulta de cliente')+'&body='+encodeURIComponent('Hola, necesito ayuda con...');
+
+    // Lost Luggage
+    document.getElementById('waPrettyLL').textContent = prettyES('+'+wa);
+    document.getElementById('btnWALL').href = 'https://wa.me/'+wa+'?text='+encodeURIComponent('LOST LUGGAGE: Soy huésped del hotel y he extraviado mi equipaje. Necesito reposición de artículos esenciales.');
+    document.getElementById('mailLinkLL').href = 'mailto:'+email;
+    document.getElementById('mailLinkLL').textContent = email;
+    document.getElementById('btnMailLL').href = 'mailto:'+email+'?subject='+encodeURIComponent('LOST LUGGAGE SERVICE')+'&body='+encodeURIComponent('Hola, soy huésped del hotel y he perdido mi equipaje. Necesito reposición de artículos esenciales.');
+
+    // Copiar
+    document.getElementById('copyTel').onclick = async function(){
+      try{ await navigator.clipboard.writeText(tel); this.textContent='✅ ¡Copiado!'; setTimeout(()=> this.textContent='📋 Copiar número', 1200) }catch(e){ alert('No se pudo copiar'); }
+    }
+    document.getElementById('copyWA').onclick = async function(){
+      try{ await navigator.clipboard.writeText('+'+wa); this.textContent='✅ ¡Copiado!'; setTimeout(()=> this.textContent='📋 Copiar número', 1200) }catch(e){ alert('No se pudo copiar'); }
+    }
+    document.getElementById('copyMail').onclick = async function(){
+      try{ await navigator.clipboard.writeText(email); this.textContent='✅ ¡Copiado!'; setTimeout(()=> this.textContent='📋 Copiar email', 1200) }catch(e){ alert('No se pudo copiar'); }
+    }
+
+    // Estado abierto/cerrado (L-V 09:00–18:00, S 10:00–14:00)
+    function isOpen(now){
+      const d = now.getDay();
+      const m = now.getHours()*60 + now.getMinutes();
+      const inRange=(a,b)=> m>=a && m<=b;
+      if(d>=1 && d<=5) return inRange(9*60,18*60);
+      if(d===6) return inRange(10*60,14*60);
+      return false;
+    }
+    const st = document.getElementById('telState');
+    function refresh(){
+      const open = isOpen(new Date());
+      st.textContent = open? 'Abierto ahora' : 'Cerrado';
+      st.className = 'status ' + (open? 'open':'closed');
+    }
+    refresh(); setInterval(refresh, 60*1000);
+
+    // Año
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
